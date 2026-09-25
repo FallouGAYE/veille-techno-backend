@@ -41,6 +41,38 @@ __decorate([
     }),
     (0, swagger_1.ApiCreatedResponse)({
         description: 'User successfully registered',
+        schema: {
+            example: {
+                id: 1,
+                email: 'fallou@example.com',
+                name: 'Fallou Gaye',
+                role: 'USER',
+                createdAt: '2026-09-24T20:00:00.000Z',
+            },
+        },
+    }),
+    (0, swagger_1.ApiBadRequestResponse)({
+        description: 'Invalid registration data',
+        schema: {
+            example: {
+                statusCode: 400,
+                message: [
+                    'email must be an email',
+                    'password must be longer than or equal to 8 characters',
+                ],
+                error: 'Bad Request',
+            },
+        },
+    }),
+    (0, swagger_1.ApiConflictResponse)({
+        description: 'Email already in use',
+        schema: {
+            example: {
+                statusCode: 409,
+                message: 'Email already in use',
+                error: 'Conflict',
+            },
+        },
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -58,6 +90,31 @@ __decorate([
     }),
     (0, swagger_1.ApiOkResponse)({
         description: 'User successfully logged in',
+        schema: {
+            example: {
+                accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
+            },
+        },
+    }),
+    (0, swagger_1.ApiBadRequestResponse)({
+        description: 'Invalid request body',
+        schema: {
+            example: {
+                statusCode: 400,
+                message: ['email must be an email'],
+                error: 'Bad Request',
+            },
+        },
+    }),
+    (0, swagger_1.ApiUnauthorizedResponse)({
+        description: 'Invalid email or password',
+        schema: {
+            example: {
+                statusCode: 401,
+                message: 'Invalid email or password',
+                error: 'Unauthorized',
+            },
+        },
     }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

@@ -5,26 +5,26 @@ export declare class ListsService {
     private readonly prisma;
     constructor(prisma: PrismaService);
     create(userId: number, createListDto: CreateListDto): Promise<{
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
         ownerId: number;
     }>;
     findAll(userId: number): Promise<{
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
         ownerId: number;
     }[]>;
     update(listId: number, userId: number, updateListDto: UpdateListDto): Promise<{
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
         ownerId: number;
     }>;

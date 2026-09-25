@@ -12,26 +12,26 @@ export declare class ListsController {
     private readonly listsService;
     constructor(listsService: ListsService);
     findAll(request: AuthenticatedRequest): Promise<{
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
         ownerId: number;
     }[]>;
     create(request: AuthenticatedRequest, createListDto: CreateListDto): Promise<{
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
         ownerId: number;
     }>;
     update(id: number, request: AuthenticatedRequest, updateListDto: UpdateListDto): Promise<{
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
         ownerId: number;
     }>;

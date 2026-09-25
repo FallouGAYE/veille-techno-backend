@@ -10,8 +10,13 @@ import {
 } from '@nestjs/common';
 
 import {
+  ApiBadRequestResponse,
   ApiBearerAuth,
   ApiBody,
+  ApiConflictResponse,
+  ApiForbiddenResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
   ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -42,8 +47,28 @@ export class UsersController {
   @ApiOperation({
     summary: 'Get the authenticated user profile',
   })
+  @ApiOkResponse({
+    description: 'Authenticated user profile',
+    schema: {
+      example: {
+        id: 1,
+        email: 'fallou@example.com',
+        name: 'Fallou Gaye',
+        role: 'USER',
+        createdAt: '2026-09-24T20:00:00.000Z',
+        updatedAt: '2026-09-24T20:00:00.000Z',
+      },
+    },
+  })
   @ApiUnauthorizedResponse({
     description: 'Missing, invalid or expired JWT',
+    schema: {
+      example: {
+        statusCode: 401,
+        message: 'Authentication required',
+        error: 'Unauthorized',
+      },
+    },
   })
   getMe(@Req() request: AuthenticatedRequest) {
     return this.usersService.findMe(request.user.sub);
@@ -53,9 +78,75 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({
     summary: 'Update a user',
+    description:
+      'A user can update their own profile. Only an administrator can update another user or change a user role.',
   })
   @ApiBody({
     type: UpdateUserDto,
+  })
+  @ApiOkResponse({
+    description: 'User successfully updated',
+    schema: {
+      example: {
+        id: 1,
+        email: 'fallou@example.com',
+        name: 'Fallou Gaye',
+        role: 'USER',
+        createdAt: '2026-09-24T20:00:00.000Z',
+        updatedAt: '2026-09-24T21:00:00.000Z',
+      },
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Invalid user id or request body',
+    schema: {
+      example: {
+        statusCode: 400,
+        message: ['email must be an email'],
+        error: 'Bad Request',
+      },
+    },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Missing, invalid or expired JWT',
+    schema: {
+      example: {
+        statusCode: 401,
+        message: 'Authentication required',
+        error: 'Unauthorized',
+      },
+    },
+  })
+  @ApiForbiddenResponse({
+    description:
+      'The authenticated user is not allowed to perform this modification',
+    schema: {
+      example: {
+        statusCode: 403,
+        message: 'You are not allowed to modify this user',
+        error: 'Forbidden',
+      },
+    },
+  })
+  @ApiNotFoundResponse({
+    description: 'User not found',
+    schema: {
+      example: {
+        statusCode: 404,
+        message: 'User not found',
+        error: 'Not Found',
+      },
+    },
+  })
+  @ApiConflictResponse({
+    description: 'Email already in use',
+    schema: {
+      example: {
+        statusCode: 409,
+        message: 'Email already in use',
+        error: 'Conflict',
+      },
+    },
   })
   updateUser(
     @Param('id', ParseIntPipe) id: number,

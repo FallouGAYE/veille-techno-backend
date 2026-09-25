@@ -5,48 +5,48 @@ export declare class CardsService {
     private readonly prisma;
     constructor(prisma: PrismaService);
     create(listId: number, userId: number, createCardDto: CreateCardDto): Promise<{
-        description: string | null;
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
+        description: string | null;
         listId: number;
     }>;
     findAllByList(listId: number, userId: number): Promise<{
-        description: string | null;
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
+        description: string | null;
         listId: number;
     }[]>;
     findOne(cardId: number, userId: number): Promise<{
         list: {
-            title: string;
             id: number;
             createdAt: Date;
             updatedAt: Date;
+            title: string;
             position: number;
             ownerId: number;
         };
     } & {
-        description: string | null;
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
+        description: string | null;
         listId: number;
     }>;
     update(cardId: number, userId: number, updateCardDto: UpdateCardDto): Promise<{
-        description: string | null;
-        title: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
+        title: string;
         position: number;
+        description: string | null;
         listId: number;
     }>;
     remove(cardId: number, userId: number): Promise<void>;

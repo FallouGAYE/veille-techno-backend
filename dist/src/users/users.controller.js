@@ -37,8 +37,28 @@ __decorate([
     (0, swagger_1.ApiOperation)({
         summary: 'Get the authenticated user profile',
     }),
+    (0, swagger_1.ApiOkResponse)({
+        description: 'Authenticated user profile',
+        schema: {
+            example: {
+                id: 1,
+                email: 'fallou@example.com',
+                name: 'Fallou Gaye',
+                role: 'USER',
+                createdAt: '2026-09-24T20:00:00.000Z',
+                updatedAt: '2026-09-24T20:00:00.000Z',
+            },
+        },
+    }),
     (0, swagger_1.ApiUnauthorizedResponse)({
         description: 'Missing, invalid or expired JWT',
+        schema: {
+            example: {
+                statusCode: 401,
+                message: 'Authentication required',
+                error: 'Unauthorized',
+            },
+        },
     }),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
@@ -50,9 +70,73 @@ __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, swagger_1.ApiOperation)({
         summary: 'Update a user',
+        description: 'A user can update their own profile. Only an administrator can update another user or change a user role.',
     }),
     (0, swagger_1.ApiBody)({
         type: update_user_dto_1.UpdateUserDto,
+    }),
+    (0, swagger_1.ApiOkResponse)({
+        description: 'User successfully updated',
+        schema: {
+            example: {
+                id: 1,
+                email: 'fallou@example.com',
+                name: 'Fallou Gaye',
+                role: 'USER',
+                createdAt: '2026-09-24T20:00:00.000Z',
+                updatedAt: '2026-09-24T21:00:00.000Z',
+            },
+        },
+    }),
+    (0, swagger_1.ApiBadRequestResponse)({
+        description: 'Invalid user id or request body',
+        schema: {
+            example: {
+                statusCode: 400,
+                message: ['email must be an email'],
+                error: 'Bad Request',
+            },
+        },
+    }),
+    (0, swagger_1.ApiUnauthorizedResponse)({
+        description: 'Missing, invalid or expired JWT',
+        schema: {
+            example: {
+                statusCode: 401,
+                message: 'Authentication required',
+                error: 'Unauthorized',
+            },
+        },
+    }),
+    (0, swagger_1.ApiForbiddenResponse)({
+        description: 'The authenticated user is not allowed to perform this modification',
+        schema: {
+            example: {
+                statusCode: 403,
+                message: 'You are not allowed to modify this user',
+                error: 'Forbidden',
+            },
+        },
+    }),
+    (0, swagger_1.ApiNotFoundResponse)({
+        description: 'User not found',
+        schema: {
+            example: {
+                statusCode: 404,
+                message: 'User not found',
+                error: 'Not Found',
+            },
+        },
+    }),
+    (0, swagger_1.ApiConflictResponse)({
+        description: 'Email already in use',
+        schema: {
+            example: {
+                statusCode: 409,
+                message: 'Email already in use',
+                error: 'Conflict',
+            },
+        },
     }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
