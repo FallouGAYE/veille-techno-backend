@@ -1,0 +1,22 @@
+﻿Title,Status,Type de ticket,Domaine,Priorité,Estimation
+Initialisation du projet,Terminé,Chore,Infra,Must have,3
+Mise en place de Swagger,Terminé,Chore,Infra,Must have,2
+Inscription d'un utilisateur,En revue,Feature,Auth & Users,Must have,3
+Connexion d'un utilisateur,En revue,Feature,Auth & Users,Must have,2
+Consulter l'utilisateur connecté,En revue,Feature,Auth & Users,Should have,1
+Modifier un utilisateur et ses droits,En revue,Feature,Auth & Users,Must have,3
+Lister mes listes,En revue,Feature,Listes,Must have,1
+Créer une liste,En revue,Feature,Listes,Must have,2
+Modifier une liste,En revue,Feature,Listes,Should have,2
+Supprimer une liste,En revue,Feature,Listes,Must have,2
+Lister les cartes d'une liste,En revue,Feature,Cartes,Must have,1
+Créer une carte,En revue,Feature,Cartes,Must have,2
+Consulter une carte,En revue,Feature,Cartes,Should have,1
+Modifier ou déplacer une carte,En revue,Feature,Cartes,Must have,3
+Supprimer une carte,En revue,Feature,Cartes,Must have,1
+Rapport de veille technologique,Terminé,Documentation,Documentation,Must have,3
+README détaillé du projet,Terminé,Documentation,Documentation,Must have,1
+Mise en place des tests (fixtures),En cours,Chore,Documentation,Must have,2
+Tests d'API automatisés avancés,Backlog,Feature,Bonus,Could have,3
+API GraphQL en complément du REST,Backlog,Feature,Bonus,Could have,5
+Étude de performance / optimisation,Backlog,Documentation,Bonus,Could have,2
